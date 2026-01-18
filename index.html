@@ -3,9 +3,556 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>project-8979ba1768759932174</title>
+    <title>Burger Bliss | The Ultimate Burger Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF4C00;
+            --primary-dark: #E64400;
+            --secondary: #FFB400;
+            --dark: #1A1A1A;
+            --light: #F8F9FA;
+            --white: #FFFFFF;
+            --gray: #6C757D;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 76, 0, 0.3);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        /* Navigation */
+        nav {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .logo span {
+            color: var(--dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://placehold.co/1920x1080/222/white?text=Juicy+Burger+Background') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 0;
+            padding-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .section-header .underline {
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* Menu Section */
+        .menu {
+            padding: 100px 0;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .menu-item {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .menu-item:hover {
+            transform: scale(1.02);
+        }
+
+        .menu-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .menu-info {
+            padding: 25px;
+        }
+
+        .menu-info h3 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            color: var(--primary);
+            font-weight: 900;
+        }
+
+        .menu-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background-color: var(--dark);
+            color: var(--white);
+        }
+
+        .about-flex {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .about-image, .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+
+        /* CTA Section */
+        .cta-banner {
+            padding: 80px 0;
+            background-color: var(--primary);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-banner h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 0 20px;
+            background-color: #111;
+            color: var(--white);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            .about-flex {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Blank white page -->
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">BURGER<span>BLISS</span></a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" class="btn btn-primary">Order Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>BITE INTO<br>PERFECTION</h1>
+                <p>Experience the finest blend of premium Angus beef, secret sauces, and artisanal buns crafted for true burger lovers.</p>
+                <div class="hero-btns">
+                    <a href="#menu" class="btn btn-primary">Explore Menu</a>
+                    <a href="#about" class="btn btn-outline" style="border-color: white; color: white;">Our Story</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Us?</h2>
+                <div class="underline"></div>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🥩</span>
+                    <h3>Premium Beef</h3>
+                    <p>100% grass-fed Angus beef, ground fresh daily in our kitchen.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🥬</span>
+                    <h3>Fresh Veggies</h3>
+                    <p>Crispy lettuce, vine-ripened tomatoes, and organic ingredients.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🚀</span>
+                    <h3>Fast Delivery</h3>
+                    <p>Hot and juicy burgers delivered to your doorstep in 30 mins.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <div class="section-header">
+                <h2>Popular Burgers</h2>
+                <div class="underline"></div>
+            </div>
+            <div class="menu-grid">
+                <!-- Item 1 -->
+                <div class="menu-item">
+                    <img src="https://placehold.co/600x400/333/white?text=The+Classic+King" alt="Classic Burger" class="menu-image">
+                    <div class="menu-info">
+                        <h3>The Classic King <span class="price">$12.99</span></h3>
+                        <p>Double patty, cheddar cheese, lettuce, tomato, and our signature king sauce.</p>
+                        <button class="btn btn-outline" style="width: 100%;">Add to Cart</button>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="menu-item">
+                    <img src="https://placehold.co/600x400/333/white?text=Smokey+BBQ" alt="BBQ Burger" class="menu-image">
+                    <div class="menu-info">
+                        <h3>Smokey BBQ <span class="price">$14.50</span></h3>
+                        <p>Crispy onion rings, bacon, melted provolone, and hickory smoked BBQ sauce.</p>
+                        <button class="btn btn-outline" style="width: 100%;">Add to Cart</button>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="menu-item">
+                    <img src="https://placehold.co/600x400/333/white?text=Spicy+Inferno" alt="Spicy Burger" class="menu-image">
+                    <div class="menu-info">
+                        <h3>Spicy Inferno <span class="price">$13.99</span></h3>
+                        <p>Jalapeños, pepper jack cheese, sriracha mayo, and spicy seasoned beef.</p>
+                        <button class="btn btn-outline" style="width: 100%;">Add to Cart</button>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="menu-item">
+                    <img src="https://placehold.co/600x400/333/white?text=Truffle+Mushroom" alt="Mushroom Burger" class="menu-image">
+                    <div class="menu-info">
+                        <h3>Truffle Bliss <span class="price">$15.99</span></h3>
+                        <p>Sautéed wild mushrooms, swiss cheese, and luxury truffle aioli.</p>
+                        <button class="btn btn-outline" style="width: 100%;">Add to Cart</button>
+                    </div>
+                </div>
+                <!-- Item 5 -->
+                <div class="menu-item">
+                    <img src="https://placehold.co/600x400/333/white?text=Garden+Delight" alt="Veggie Burger" class="menu-image">
+                    <div class="menu-info">
+                        <h3>Garden Delight <span class="price">$11.50</span></h3>
+                        <p>Plant-based patty, avocado, sprouts, and vegan herb mayo.</p>
+                        <button class="btn btn-outline" style="width: 100%;">Add to Cart</button>
+                    </div>
+                </div>
+                <!-- Item 6 -->
+                <div class="menu-item">
+                    <img src="https://placehold.co/600x400/333/white?text=Breakfast+Burger" alt="Breakfast Burger" class="menu-image">
+                    <div class="menu-info">
+                        <h3>The Morning Star <span class="price">$14.99</span></h3>
+                        <p>Sunny-side up egg, hash brown, cheddar, and maple-glazed bacon.</p>
+                        <button class="btn btn-outline" style="width: 100%;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-flex">
+                <div class="about-image">
+                    <img src="https://placehold.co/800x600/222/white?text=Our+Kitchen+Craft" alt="Our Kitchen">
+                </div>
+                <div class="about-text">
+                    <h2>Our Grilling Philosophy</h2>
+                    <p>Founded in 2010, Burger Bliss started with a simple mission: to create the perfect burger without compromise. We believe that great food starts with great ingredients.</p>
+                    <p>Every morning, our butchers prepare our custom beef blend, and our bakers deliver fresh brioche buns. We don't just cook food; we craft experiences that bring people together over the shared love of a damn good burger.</p>
+                    <a href="#" class="btn btn-primary">Read Full Story</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-banner">
+        <div class="container">
+            <h2>Hungry? We've Got You Covered.</h2>
+            <p style="margin-bottom: 30px; font-size: 1.2rem;">Order now and get free delivery on your first purchase over $30!</p>
+            <a href="#" class="btn btn-outline" style="background: white; border-color: white; color: var(--primary);">Claim Your Offer</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo" style="margin-bottom: 20px;">BURGER<span>BLISS</span></a>
+                    <p style="color: #666;">The best burgers in town, crafted with love and passion for quality food.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Location</h4>
+                    <p style="color: #aaa;">123 Burger Lane<br>Foodie District<br>New York, NY 10001</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <p style="color: #aaa;">Phone: (555) 123-4567<br>Email: hello@burgerbliss.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Burger Bliss. All rights reserved. Designed for burger enthusiasts.
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
